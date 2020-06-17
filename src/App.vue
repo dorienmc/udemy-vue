@@ -45,7 +45,7 @@ export default {
             //     }, error => {
             //         console.log(error);
             //     });
-            this.resource.save({}, this.user);
+            this.resource.saveAlt(this.user);
         },
         fetchData() {
             this.$http.get('data.json')
@@ -62,9 +62,12 @@ export default {
         }
     },
     created() {
+        const customActions = {
+            saveAlt: {method: 'POST', url: `alternative.json`}
+        }
         //Resource service of vue-resource
         //Allows the use of default actions like get/save/query/update/remove
-        this.resource = this.$resource('data.json')
+        this.resource = this.$resource('data.json', {}, customActions)
     }
 }
 </script>

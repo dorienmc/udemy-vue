@@ -32,21 +32,23 @@ export default {
                 username: '',
                 email: ''
             },
-            users: []
+            users: [],
+            resource: {}
         };
     },
     methods: {
         submit() {
             //$http is added by the vue-resource plugin
-            this.$http.post('', this.user)
-                .then(response => { 
-                    console.log(response);
-                }, error => {
-                    console.log(error);
-                });
+            // this.$http.post('data.json', this.user)
+            //     .then(response => { 
+            //         console.log(response);
+            //     }, error => {
+            //         console.log(error);
+            //     });
+            this.resource.save({}, this.user);
         },
         fetchData() {
-            this.$http.get('')
+            this.$http.get('data.json')
                 .then(response => {
                     return response.json();
                 })
@@ -58,6 +60,11 @@ export default {
                     this.users = resultArray;
                 });
         }
+    },
+    created() {
+        //Resource service of vue-resource
+        //Allows the use of default actions like get/save/query/update/remove
+        this.resource = this.$resource('data.json')
     }
 }
 </script>

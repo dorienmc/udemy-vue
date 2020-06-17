@@ -38,7 +38,7 @@ export default {
     methods: {
         submit() {
             //$http is added by the vue-resource plugin
-            this.$http.post('https://udemy-vuejs-http-45e40.firebaseio.com/data.json', this.user)
+            this.$http.post('', this.user)
                 .then(response => { 
                     console.log(response);
                 }, error => {
@@ -46,7 +46,7 @@ export default {
                 });
         },
         fetchData() {
-            this.$http.get('https://udemy-vuejs-http-45e40.firebaseio.com/data.json')
+            this.$http.get('')
                 .then(response => {
                     return response.json();
                 })

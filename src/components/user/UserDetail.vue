@@ -4,22 +4,22 @@
         <p> ID: {{ $route.params.id }} </p>
         <router-link 
             tag="button" 
-            :to="{ name: 'userEdit', params: { id: $route.params.id}, query: { locale: 'en', q: 100} }" 
+            :to="link" 
             class="btn btn-primary">Edit user</router-link>
     </div> 
 </template>
 
 <script>
 export default {
-    // data() {
-    //     return  {
-    //         id: this.$route.params.id
-    //     }
-    // },
-    // watch: {
-    //     '$route'(to,from) {
-    //         this.id = to.params.id;
-    //     }
-    // }
+    data() {
+        return  {
+            link: { 
+                name: 'userEdit', 
+                params: { id: this.$route.params.id}, 
+                query: { locale: 'en', q: 100},
+                hash: '#data' 
+            }
+        }
+    }
 }
 </script>

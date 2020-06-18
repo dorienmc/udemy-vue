@@ -20,6 +20,19 @@ export default {
                 hash: '#data' 
             }
         }
+    },
+    beforeRouteEnter(to, from, next) {
+        console.log("beforeRouteEnter in UserDetail")
+        //As long as you don't call next the vue instance is not initialized yet, so things like this.link cannot be called
+        //You can access the vue model with
+        // next(vm => {
+        //     vm.link;
+        // })
+        if (true) { //some test
+            next();
+        } else {
+            next(false);
+        }
     }
 }
 </script>

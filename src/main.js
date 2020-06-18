@@ -17,6 +17,12 @@ const router = new VueRouter( {
   }
 });
 
+//Executed before each routing actions
+router.beforeEach((to,from,next) => {
+  console.log("Global before each");
+  next(); //nothing for continue, false aborts, object for redirect
+});
+
 new Vue({
   el: '#app',
   router,

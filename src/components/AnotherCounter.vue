@@ -16,7 +16,7 @@ export default {
     // decrement () {
     //   this.$store.commit('decrement')
     // }
-    ...mapActions([
+    ...mapActions('counter', [
       'asyncIncrement',
       'decrement'
     ])

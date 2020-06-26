@@ -3,11 +3,10 @@
 </template>
 
 <script>
-import * as types from '../store/types.js';
 export default {
   computed: {
     counter() {
-      return this.$store.getters[types.DOUBLE_COUNTER]
+      return this.$store.getters['counter/doubleCounter'];
     }
   }
 }

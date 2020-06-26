@@ -10,9 +10,9 @@ import { mapMutations } from 'vuex';
 
 export default {
   methods: {
-    ...mapMutations(['increment', 'decrement']),
+    ...mapMutations('counter', ['increment', 'decrement']),
     increment(by) {
-      this.$store.dispatch('increment',by)
+      this.$store.dispatch('counter/increment',by)
     }
   }
 }

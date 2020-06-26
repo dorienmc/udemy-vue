@@ -1,22 +1,21 @@
 <template>
   <div>
     <p>Counter is: {{ doubleCounter }}</p>
-    <p>Number of Clicks: {{ stringCounter }}</p>
+    <p>Number of Clicks: {{ clickCounter }}</p>
   </div>
   
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import * as types from '../store/types';
 
 export default {
   computed: { 
     //... (spread operator, ES6) pull out all properties and methods and creates seperate key value pairs for each of them
-    ...mapGetters({
-      doubleCounter: types.DOUBLE_COUNTER,
-      stringCounter: types.CLICK_COUNTER
-    }),
+    ...mapGetters('counter', [
+      'doubleCounter',
+      'clickCounter'
+    ]),
     ourOwnComputedProperty() {
 
     }

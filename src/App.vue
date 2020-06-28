@@ -1,28 +1,25 @@
 <template>
     <div class="container">
+        <Header></Header>
         <div class="row">
-            <router-view></router-view>
+            <div class="col-xs-12">
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-
+import Header from './components/Header.vue';
 export default {
-    data() {
-        return {
-        }
-    },
-    computed: {
-        
-    },
-    filters: {
-        
-    },
     components: {
+        Header
     }
 }
 </script>
 
 <style>
+    body {
+        padding: 30px;
+    }
 </style>

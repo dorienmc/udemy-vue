@@ -1,10 +1,26 @@
 <template>
-  <h1>Page for the Portfolio component</h1>
+  <div>
+    <app-stock v-for="stock in stocks" :key=stock.id :stock="stock"></app-stock>
+  </div>
 </template>
 
 <script>
-export default {
+import Stock from './Stock.vue';
 
+export default {
+  data () {
+    return {
+      stocks: [{ id: 1, name: "BMW", price: 110, quantity: 1 }]
+    }
+  },
+  components: {
+    appStock: Stock
+  },
+  // computed: {
+  //   stocks() {
+  //     return this.$store.getters.stockPortfolio;
+  //   }
+  // }
 }
 </script>
 

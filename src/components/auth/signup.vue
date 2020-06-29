@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
   export default {
     data () {
       return {
@@ -103,6 +105,9 @@
           terms: this.terms
         }
         console.log(formData)
+        axios.post('https://vuejs-udemy-axios-d6bf5.firebaseio.com/users.json',formData)
+          .then(response => console.log(response))
+          .then(error => console.error(error))
       }
     }
   }

@@ -13,7 +13,7 @@
           type="number" 
           class="from-control" 
           placeholder="Quantity"
-          v-model=quantity
+          v-model.number=quantity
           :class="{danger: insufficientFunds}">
         </div>
         <div class="pull-right">
@@ -41,7 +41,7 @@ export default {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
-        quantity: +this.quantity
+        quantity: this.quantity
       };
       this.$store.dispatch('buyStock', order);
       this.quantity = 0;

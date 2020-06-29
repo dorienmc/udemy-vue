@@ -9,7 +9,8 @@ const mutations = {
       console.log("Cannot buy!");
       return;
     }
-      const record = state.stocks.find((element) => element.id == stockId);
+    
+    const record = state.stocks.find((element) => element.id == stockId);
     if (record) {
       record.quantity += quantity;
     } else {
@@ -24,11 +25,16 @@ const mutations = {
     const record = state.stocks.find((element) => element.id == stockId);
     if (record.quantity > quantity) {
       record.quantity -= quantity;
-    } else {
+    } 
+    else {
       state.stocks.splice(state.stocks.indexOf(record), 1);
       quantity = record.quantity;
     }
     state.funds += stockPrice * quantity;
+  },
+  'SET_PORTFOLIO' (state, portfolio) {
+    state.funds = portfolio.funds;
+    state.stocks = portfolio.stockPortfolio ? portfolio.stockPortfolio : [];
   }
 };
 

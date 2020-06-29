@@ -27,7 +27,7 @@ export default {
     appUser: user
   },
   created() {
-    axios.get('https://vuejs-udemy-axios-d6bf5.firebaseio.com/users.json')
+    axios.get('/users.json')
       .then(response => {
         console.log(response)
         const data = response.data

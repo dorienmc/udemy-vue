@@ -9,7 +9,7 @@ const mutations = {
     if (record) {
       record.quantity += quantity;
     } else {
-      state.stock.push( {
+      state.stocks.push( {
         id: stockId,
         quantity: quantity
       })
@@ -36,7 +36,7 @@ const actions = {
 const getters = {
   stockPortfolio (state, getters) {
     return state.stocks.map(stock => {
-        const record = getters.stocks.find(element => element.id == stocks.id);
+        const record = getters.stocks.find(element => element.id == stock.id);
         return {
           id: stock.id,
           quantity: stock.quantity,

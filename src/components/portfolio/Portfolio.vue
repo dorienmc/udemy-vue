@@ -6,21 +6,17 @@
 
 <script>
 import Stock from './Stock.vue';
+import {mapGetters} from 'vuex';
 
 export default {
-  data () {
-    return {
-      stocks: [{ id: 1, name: "BMW", price: 110, quantity: 1 }]
-    }
-  },
   components: {
     appStock: Stock
   },
-  // computed: {
-  //   stocks() {
-  //     return this.$store.getters.stockPortfolio;
-  //   }
-  // }
+  computed: {
+    ...mapGetters({
+      stocks: 'stockPortfolio'
+    })
+  }
 }
 </script>
 

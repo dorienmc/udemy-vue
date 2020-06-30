@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from './axios-auth.js'
+import globalAxios from 'axios'
 
 Vue.use(Vuex)
 
@@ -8,16 +9,20 @@ export default new Vuex.Store({
   state: {
     idToken: null,
     userId: null,
-    API_KEY: "AIzaSyDLUwsnbS7L_vpNAVvxrf03u9Csflv6jmc"
+    API_KEY: "AIzaSyDLUwsnbS7L_vpNAVvxrf03u9Csflv6jmc",
+    user: null
   },
   mutations: {
     authUser (state, userData) {
       state.idToken = userData.token
       state.userId = userData.userId
+    },
+    storeUser(state, user) {
+      state.user = user
     }
   },
   actions: {
-    signup({commit}, authData) {
+    signup({commit, dispatch}, authData) {
       axios
         .post("/accounts:signUp?key=" + this.state.API_KEY, {
           email: authData.email,
@@ -30,8 +35,9 @@ export default new Vuex.Store({
             token: response.data.idToken, 
             userId: response.data.localId
           })
+          dispatch('storeUser', authData)
         })
-        .then((error) => console.error(error));
+        .catch((error) => console.error(error));
     },
     login({commit}, authData) {
       axios
@@ -47,9 +53,47 @@ export default new Vuex.Store({
             userId: response.data.localId,
           });
         });
+    },
+    storeUser ({commit, state}, userData) {
+      if (!state.idToken) {
+        return
+      }
+
+      userData.userID = state.userId
+
+      globalAxios
+        .post("/users.json" + "?auth=" + state.idToken, userData)
+        .then((res) => console.log(res))
+        .catch((error) => console.error(error));
+    },
+    fetchUser( {commit, state}) {
+      if (!state.idToken) {
+        return;
+      }
+
+      globalAxios
+        .get("/users.json" + "?auth=" + state.idToken)
+        .then((response) => {
+          console.log(response);
+          const data = response.data;
+          const users = [];
+          for (let key in data) {
+            const user = data[key];
+            user.id = key;
+            users.push(user);
+          }
+          
+          let currentUser = users.find(item => item.userID == state.userId)
+          console.log(currentUser)
+
+          commit("storeUser", currentUser);
+        })
+        .catch((error) => console.error(error));
     }
   },
   getters: {
-
+    user (state) {
+      return state.user
+    }
   }
 })

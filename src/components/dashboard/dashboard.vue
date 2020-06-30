@@ -19,29 +19,19 @@ import user from './user.vue';
 export default {
   data() {
     return {
-      email: '',
       users: []
+    }
+  },
+  computed: {
+    email() {
+      return !this.$store.getters.user ? false : this.$store.getters.user.email
     }
   },
   components: {
     appUser: user
   },
   created() {
-    axios.get('/users.json')
-      .then(response => {
-        console.log(response)
-        const data = response.data
-        const users = []
-        for (let key in data) {
-          const user = data[key]
-          user.id = key
-
-          users.push(user)
-        }
-        this.users = users
-        this.email = users[0].email
-      })
-      .catch(error => console.error(error))
+    this.$store.dispatch('fetchUser')
   }
 }
 </script>

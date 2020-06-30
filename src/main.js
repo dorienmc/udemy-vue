@@ -6,7 +6,6 @@ import router from './router'
 import store from './store'
 
 axios.defaults.baseURL = "https://vuejs-udemy-axios-d6bf5.firebaseio.com";
-axios.defaults.headers.common['Authorization']='some_auth_token';
 axios.defaults.headers.get['Accepts']='application/json';
 const requestInterceptor = axios.interceptors.request.use(config => {
   console.log("Request interceptor", config)

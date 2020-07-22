@@ -109,7 +109,12 @@
         required,
         email,
         unique: val => {
-          return val !== 'test@test.com'
+          if (val === '') return true //let other validators check this
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(val !== 'test@test.com')
+            }, 1000)
+          })
         }
       },
       age: {

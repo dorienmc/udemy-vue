@@ -2,12 +2,17 @@ const app = Vue.createApp({
   data() {
     return {
       counter: 0,
-      name: "placeholder",
+      name: "",
+      lastName: "Lorijn",
     };
   },
   methods: {
-    setName(event, lastName) {
-      this.name = event.target.value + " " + lastName;
+    outputFullname() {
+      if (this.name === "") {
+        return "";
+      } else {
+        return this.name + " " + this.lastName;
+      }
     },
     add(num) {
       this.counter = this.counter + num;

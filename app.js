@@ -6,14 +6,16 @@ const app = Vue.createApp({
       lastName: "Lorijn",
     };
   },
-  methods: {
-    outputFullname() {
+  computed: {
+    fullname() {
       if (this.name === "") {
         return "";
       } else {
         return this.name + " " + this.lastName;
       }
     },
+  },
+  methods: {
     add(num) {
       this.counter = this.counter + num;
     },
